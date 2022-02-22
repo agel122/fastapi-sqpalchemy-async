@@ -19,11 +19,11 @@ async def create_record(db: Session, record: schemas.RecordCreate):
 
 
 async def get_record(db: Session, record_id: int):
-    return await db.execute(select(models.Record).where(models.Record.id == record_id)).first()
+    return await db.execute(select(models.Record).where(models.Record.id == record_id)).scalars().first()
 
 
 async def get_records(db: Session, author_id: int):
-    return await db.execute(select(models.Record).where(models.Record.author_id == author_id)).all()
+    return await db.execute(select(models.Record).where(models.Record.author_id == author_id)).scalars().all()
 
 
 async def delete_record(db: Session, record_id: int):
