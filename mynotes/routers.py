@@ -22,12 +22,12 @@ async def get_records(author_id: int, session: AsyncSession = Depends(get_sessio
 
 @router.post('/add_record')
 async def create_record(record: schemas.RecordCreate, session: AsyncSession = Depends(get_session)):
-    await create_record(record=record, db=session)
+    await crud.create_record(record=record, db=session)
 
 
 @router.post('/add_author')
 async def create_author(author: schemas.AuthorCreate, session: AsyncSession = Depends(get_session)):
-    await create_author(author=author, session=session)
+    await crud.create_author(author=author, db=session)
 
 
 @router.delete('/record/{record_id}')

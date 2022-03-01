@@ -2,10 +2,10 @@ import uvicorn
 from fastapi import FastAPI
 
 from database import engine, Base
-from routers import *
+from . import routers
 
 app = FastAPI()
-app.include_router(router)
+app.include_router(routers.router)
 
 
 @app.on_event("startup")
