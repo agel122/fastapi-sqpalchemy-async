@@ -1,13 +1,13 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import delete, select
 
-from . import models, schemas
+from mynotes import models, schemas
 
 
 async def create_author(db: AsyncSession, author: schemas.AuthorCreate):
     db_author = models.Author(name=author.name)
     db.add(db_author)
-    await db.flush()
+    await db.commit()
 
 
 async def create_record(db: AsyncSession, record: schemas.RecordCreate):
@@ -15,7 +15,7 @@ async def create_record(db: AsyncSession, record: schemas.RecordCreate):
                               description=record.description,
                               author_id=record.author_id)
     db.add(db_record)
-    await db.flush()
+    await db.commit()
 
 
 async def get_record(db: AsyncSession, record_id: int):
